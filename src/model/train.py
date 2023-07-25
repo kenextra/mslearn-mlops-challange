@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 def main(args):
     # TO DO: enable autologging
     mlflow.autolog()
-    
+
     # read data
     df = get_csvs_df(args.training_data)
 
@@ -38,11 +38,16 @@ def get_csvs_df(path):
 # TO DO: add function to split data
 def split_data(df):
     # separate features and labels
-    X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values
-    
+    feat1 = ['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'Age']
+    feat2 = ['TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree']
+    features = feat1 + feat2
+    X, y = df[features].values
+    y = df['Diabetic'].values
+
     # split data into training set and test set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
-    
+    train_test = train_test_split(X, y, test_size=0.30, random_state=0)
+    X_train, X_test = train_test[0], train_test[1]
+    y_train, y_test = train_test[2], train_test[3]
     return X_train, X_test, y_train, y_test
 
 
@@ -66,6 +71,7 @@ def parse_args():
 
     # return args
     return args
+
 
 # run script
 if __name__ == "__main__":
