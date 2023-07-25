@@ -43,7 +43,7 @@ def split_data(df):
     features = feat1 + feat2
     X, y = df[features].values
     y = df['Diabetic'].values
-    
+
     # split data into training set and test set
     train_test = train_test_split(X, y, test_size=0.30, random_state=0)
     X_train, X_test = train_test[0], train_test[1]
