@@ -34,5 +34,5 @@ jobs:
       with: 
         creds: ${{secrets.AZURE_CREDENTIALS}} 
     - name: deploy model
-      run: az ml online-deployment create --name diabetes-deployment --endpoint diabetes-endpoint -f ./diabetes-deployment.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge
+      run: az ml online-deployment create --name diabetes-deployment --endpoint diabetes-endpoint -f ./diabetes-deployment.yml --all-traffic --resource-group MLOps-Challenge --workspace-name mlops-challenge
       working-directory: deployment
