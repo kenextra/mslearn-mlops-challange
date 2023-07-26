@@ -17,7 +17,7 @@ jobs:
       with: 
         creds: ${{secrets.AZURE_CREDENTIALS}} 
     - name: create endpoint
-      run: az ml online-endpoint create --name diabetes-endpoint -f ./create-endpoint.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge --stream
+      run: az ml online-endpoint create --name diabetes-endpoint -f ./create-endpoint.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge
       working-directory: deployment
   
   deploy_model:
@@ -34,5 +34,5 @@ jobs:
       with: 
         creds: ${{secrets.AZURE_CREDENTIALS}} 
     - name: deploy model
-      run: az ml online-deployment create --name diabetes-deployment --endpoint diabetes-endpoint -f ./diabetes-deployment.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge --stream
+      run: az ml online-deployment create --name diabetes-deployment --endpoint diabetes-endpoint -f ./diabetes-deployment.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge
       working-directory: deployment
