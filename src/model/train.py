@@ -41,7 +41,7 @@ def split_data(df):
     feat1 = ['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'Age']
     feat2 = ['TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree']
     features = feat1 + feat2
-    X, y = df[features].values
+    X = df[features].values
     y = df['Diabetic'].values
 
     # split data into training set and test set
