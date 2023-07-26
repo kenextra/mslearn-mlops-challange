@@ -38,9 +38,9 @@ def get_csvs_df(path):
 # TO DO: add function to split data
 def split_data(df):
     # separate features and labels
-    feat1 = ['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'Age']
-    feat2 = ['TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree']
-    features = feat1 + feat2
+    feat1 = ['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure']
+    f2 = ['TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree', 'Age']
+    features = feat1 + f2
     X = df[features].values
     y = df['Diabetic'].values
 
