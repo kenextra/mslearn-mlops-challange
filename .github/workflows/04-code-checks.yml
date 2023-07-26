@@ -5,6 +5,7 @@ on:
 
 jobs:
   job1:
+    environment: development
     name: linting
     runs-on: ubuntu-latest
     steps:
