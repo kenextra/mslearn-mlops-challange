@@ -1,0 +1,38 @@
+name: Manually deploy an Azure Machine Learning job to a managed online endpoint
+
+on: 
+  workflow_dispatch: 
+
+jobs: 
+  create_endpoint:
+    environment: production
+    runs-on: ubuntu-latest 
+    steps: 
+    - name: Check out repo 
+      uses: actions/checkout@main 
+    - name: Install az ml extension 
+      run: az extension add -n ml -y 
+    - name: Azure login 
+      uses: azure/login@v1 
+      with: 
+        creds: ${{secrets.AZURE_CREDENTIALS}} 
+    - name: create endpoint
+      run: az ml online-endpoint create --name diabetes-endpoint -f ./create-endpoint.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge --stream
+      working-directory: deployment
+  
+  deploy_model:
+    needs: create_endpoint
+    environment: production
+    runs-on: ubuntu-latest 
+    steps: 
+    - name: Check out repo 
+      uses: actions/checkout@main 
+    - name: Install az ml extension 
+      run: az extension add -n ml -y 
+    - name: Azure login 
+      uses: azure/login@v1 
+      with: 
+        creds: ${{secrets.AZURE_CREDENTIALS}} 
+    - name: deploy model
+      run: az ml online-deployment create --name diabetes-deployment --endpoint diabetes-endpoint -f ./diabetes-deployment.yml --resource-group MLOps-Challenge --workspace-name mlops-challenge --stream
+      working-directory: deployment
